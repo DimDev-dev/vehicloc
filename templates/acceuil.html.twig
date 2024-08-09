@@ -22,11 +22,11 @@
 					<div class="mini-car-icons">
 						<div>
 							<img src="{{asset('styles/icons/persons.png')}}" alt="4 places"/>
-							<p></p>
+							<p>{{voiture.numberPlaces}}</p>
 						</div>
 						<div>
 							<img src="{{asset('styles/icons/motor.png')}}" alt="Manuelle"/>
-							<p>Manuelle</p>
+							<p>{{voiture.isAutomatic}}</p>
 						</div>
 						<div>
 							<img src="{{asset('styles/icons/km.png')}}" alt="km illimités"/>
@@ -38,8 +38,10 @@
 						</div>
 					</div>
 					<div class="mini-car-price">
-						<p class="price-per-day">39,14 € / jour</p>
-						<p class="price-per-month">900,00 € / mois</p>
+						<p class="price-per-day">{{voiture.priceDays}}
+							€ / jour</p>
+						<p class="price-per-month">{{voiture.priceMonth}}
+							€ / mois</p>
 					</div>
 				</article>
 			{% endfor %}
