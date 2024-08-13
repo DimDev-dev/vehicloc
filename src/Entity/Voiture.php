@@ -21,16 +21,16 @@ class Voiture
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?int $priceMonth = null;
+    private ?float $priceMonth = null;
 
     #[ORM\Column]
-    private ?int $priceDays = null;
+    private ?float $priceDays = null;
 
     #[ORM\Column]
     private ?int $numberPlaces = null;
 
     #[ORM\Column]
-    private ?bool $isAutomatic = null;
+    private ?string $isAutomatic = null;
 
     public function getId(): ?int
     {
@@ -61,24 +61,24 @@ class Voiture
         return $this;
     }
 
-    public function getPriceMonth(): ?int
+    public function getPriceMonth(): ?float
     {
         return $this->priceMonth;
     }
 
-    public function setPriceMonth(int $priceMonth): static
+    public function setPriceMonth(float $priceMonth): static
     {
         $this->priceMonth = $priceMonth;
 
         return $this;
     }
 
-    public function getPriceDays(): ?int
+    public function getPriceDays(): ?float
     {
         return $this->priceDays;
     }
 
-    public function setPriceDays(int $priceDays): static
+    public function setPriceDays(float $priceDays): static
     {
         $this->priceDays = $priceDays;
 
@@ -97,12 +97,12 @@ class Voiture
         return $this;
     }
 
-    public function isAutomatic(): ?bool
+    public function getIsAutomatic(): ?string
     {
         return $this->isAutomatic;
     }
 
-    public function setAutomatic(bool $isAutomatic): static
+    public function setIsAutomatic(string $isAutomatic): static
     {
         $this->isAutomatic = $isAutomatic;
 
