@@ -26,6 +26,9 @@
 							<p>ou similaire | Saint-Étienne</p>
 						</a>
 						<div>
+							<a href="{{ path('voiture_car_edit', {id: voiture.id})}}"><img src="{{asset('styles/icons/editer.png')}}" alt="Editer"/></a>
+						</div>
+						<div>
 							<a href="{{ path('voiture_car_delete', {id: voiture.id})}}"><img src="{{asset('styles/icons/trash.png')}}" alt="Supprimer"/></a>
 						</div>
 					</div>
