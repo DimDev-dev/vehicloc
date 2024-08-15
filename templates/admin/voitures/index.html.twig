@@ -13,6 +13,9 @@
 		</div>
 	</div>
 {% endblock %}
+{% block action %}
+	<a href="{{path('admin_voiture_new')}}" class=" btn-nav">Ajouter un véhicule</a>
+{% endblock %}
 {% block body %}
 	<section id="fleet">
 		<h2>Découvrez la flotte de véhicules chez Véhicloc</h2>
@@ -21,10 +24,16 @@
 			{%  for voiture in voitures %}
 				<article>
 					<div class="mini-car-title">
-						<a href="{{ path('voiture_car', {id: voiture.id})}}">
+						<a href="{{ path('admin_voiture_car', {id: voiture.id})}}">
 							<h3>{{voiture.name}}</h3>
 							<p>ou similaire | Saint-Étienne</p>
 						</a>
+						<div>
+							<a href="{{ path('admin_voiture_edit', {id: voiture.id})}}"><img src="{{asset('styles/icons/editer.png')}}" alt="Editer"/></a>
+						</div>
+						<div>
+							<a href="{{ path('admin_voiture_delete', {id: voiture.id})}}"><img src="{{asset('styles/icons/trash.png')}}" alt="Supprimer"/></a>
+						</div>
 					</div>
 					<div class="mini-car-icons">
 						<div>
