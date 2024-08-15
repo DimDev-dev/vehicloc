@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\VoitureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: VoitureRepository::class)]
 class Voiture
@@ -15,21 +17,29 @@ class Voiture
     private ?int $id = null;
 
     #[ORM\Column(length: 25)]
+    #[Assert\NotBlank()]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank()]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
+    #[Assert\Positive()]
     private ?float $priceMonth = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
+    #[Assert\Positive()]
     private ?float $priceDays = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?int $numberPlaces = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?string $isAutomatic = null;
 
     public function getId(): ?int
