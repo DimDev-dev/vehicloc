@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route("/admin/voiture")]
 class VoituresController extends AbstractController
@@ -17,6 +18,9 @@ class VoituresController extends AbstractController
     #[Route('/', name: 'app_admin_car')]
     public function index(VoitureRepository $voitures): Response
     {
+        // if (!$this->isGranted('ROLE_ADMIN')) {
+        //     return $this->redirectToRoute('app_voitures_accueil');
+        // } 
         $voitures = $voitures->findAll();
 
         return $this->render('admin/voitures/index.html.twig', [
@@ -29,6 +33,9 @@ class VoituresController extends AbstractController
     public function new(Request $request, EntityManagerInterface $em): Response
     {
      
+        // if (!$this->isGranted('ROLE_ADMIN')) {
+        //     return $this->redirectToRoute('app_voitures_accueil');
+        // } 
         $voiture = new Voiture();
         $form = $this->createForm(VoitureType::class, $voiture);
         $form->handleRequest($request);

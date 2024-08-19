@@ -1,19 +1,126 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<style>
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f4f4f4;
+		margin: 0;
+		padding: 0;
+	}
 
-    {{ form_errors(registrationForm) }}
+	.form-container {
+		background-color: #fff;
+		padding: 20px;
+		margin: 50px auto;
+		width: 100%;
+		max-width: 400px;
+		border-radius: 8px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+	.form-container h2 {
+		margin-bottom: 20px;
+		color: #333;
+		text-align: center;
+	}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+	.form-container .text-muted {
+		display: block;
+		margin-bottom: 15px;
+		text-align: center;
+		color: #777;
+	}
+
+	.form-group {
+		margin-bottom: 15px;
+	}
+
+	label.required:before {
+		content: "* ";
+		color: red;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 5px;
+		color: #555;
+		font-weight: bold;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	select {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		font-size: 14px;
+		box-sizing: border-box;
+	}
+
+	input[type="text"]:focus,
+	input[type="email"]:focus,
+	input[type="password"]:focus,
+	select:focus {
+		border-color: #007bff;
+		outline: none;
+	}
+
+	button[type="submit"] {
+		width: 100%;
+		padding: 12px;
+		background-color: #007bff;
+		border: none;
+		border-radius: 4px;
+		color: white;
+		font-size: 16px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+
+	button[type="submit"]:hover {
+		background-color: #0056b3;
+	}
+</style>
+
+<section id="about">
+	<div class="container">
+		<div class="form-container">
+			<h2>Enregistrement</h2>
+			<span class="text-muted">
+				<small>*: champ requis</small>
+			</span>
+
+			{{ form_errors(registrationForm) }}
+
+			{{ form_start(registrationForm) }}
+			<div class="form-group">
+				{{ form_row(registrationForm.firstname, {label: 'Prénom'}) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(registrationForm.lastname, {label: 'Nom'}) }}
+			</div>
+			<div class="form-group">
+				{{ form_row(registrationForm.username, {label: 'Nom d\'utilisateur'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, {label: 'Adresse email'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.roles, {label: 'Rôles'}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+                </div>
+
+                <button type="submit">Enregistrer</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+</section>
 {% endblock %}

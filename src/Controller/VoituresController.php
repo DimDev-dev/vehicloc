@@ -12,6 +12,9 @@ class VoituresController extends AbstractController
     #[Route('/', name: 'app_voitures_accueil')]
     public function index(VoitureRepository $voitureRepository): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_admin_entity_display');
+        }
         $voitures = $voitureRepository->findAll();
 
         return $this->render('acceuil.html.twig', [

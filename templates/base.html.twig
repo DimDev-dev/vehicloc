@@ -22,7 +22,12 @@
 			<nav>
 				<a href="{{path('app_voitures_accueil')}}"><img src="{{ asset('styles/img/logo.png')}}" alt="Vehicloc"/></a>
 				{% block action %}
-					<a href="#" class="btn-nav">Se connecter</a>
+					{% if app.user == null %}
+						<a href="{{path('app_login')}}" class="btn-nav">Se connecter</a>
+					{% else %}
+						<a href="{{path('app_logout')}}" class="btn-nav">Se déconnecter</a>
+					{% endif %}
+
 				{% endblock %}
 			</nav>
 			{% block header%}{% endblock %}

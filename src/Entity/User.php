@@ -8,9 +8,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotCompromisedPassword;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -30,30 +30,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * La contrainte Regex valide que le mot de passe :
+     * * contient au moins un chiffre
+     * * contient au moins une lettre en minuscule
+     * * contient au moins une lettre en majuscule
+     * * contient au moins un caractère spécial qui n'est pas un espace
+     * * fait entre 8 et 32 caractères de long
      */
-    #[ORM\Column]
-    #[Assert\Length(min: 6, max: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Regex(
-        pattern: "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/",
-        message: "Password must be composed of at least one lowercase letter, one uppercase letter, and one digit"
-    )]
     #[Assert\NotCompromisedPassword()]
     #[Assert\PasswordStrength(minScore: Assert\PasswordStrength::STRENGTH_STRONG)]
-    #[NotCompromisedPassword()]
+    #[Assert\Regex('/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,32}$/')]
+    #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $firstname = null;
 
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $lastname = null;
 
+    #[Assert\Email()]
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
     private ?string $email = null;
 
     public function getId(): ?int
@@ -92,7 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
