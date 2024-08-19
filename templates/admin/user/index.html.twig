@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Véhicloc - acceuil Admin
+{% block title %}Véhicloc
 {% endblock %}
 {% block header%}
 	<div class="flex-header">
@@ -13,17 +13,36 @@
 		</div>
 	</div>
 {% endblock %}
-{% block action %}{% endblock %}
-{% block body %}
-	<div class="flex-header">
-		<div>
-			<a href="{{path('app_admin_car')}}" class="btn-nav">Lien vers les voitures</a>
-		</div>
-		<div>
-			<a href=" {{path('app_admin_user')}} " class="btn-nav">Lien vers les users</a>
-		</div>
-	</div>
+{% block action %}
+	<a href="{{path('admin_voiture_new')}}" class=" btn-nav">Ajouter un véhicule</a>
+
 {% endblock %}
+{% block body %}
+	<section id="fleet">
+		<h2>Découvrez la flotte de véhicules chez Véhicloc</h2>
+		<p>Que vous ayez besoin d'une petite citadine agile, d'une berline élégante ou même d'un SUV spacieux, nous avons une variété de véhicules  pour répondre à vos exigences.</p>
+		<div class="fleet-list">
+			{%  for user in users %}
+				<article>
+					<div class="mini-car-title">
+						<a href="#">
+							<p>
+								{{user.firstname}}
+							</p>
+							<p>
+								{{user.lastname}}
+							</p>
+							<p>
+								{{user.roles[0]}}
+							</p>
+						</a>
+					</div>
+				</article>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}
+
 {% block promise%}
 	<section id="promises">
 		<div>
